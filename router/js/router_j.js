@@ -8,23 +8,24 @@
         var router = this;
         window.addEventListener('popstate', function (e) {
             var curUrl = window.location.hash.substring(1);
-            if (!curUrl || router.allUrl.indexOf(curUrl)=='-1'){
+            if (!curUrl || router.allUrl.indexOf(curUrl) == '-1') {
                 curUrl = router.otherwiseUrl;
-                router.path(curUrl,router.getOptions(curUrl),true);
+                router.path(curUrl, router.getOptions(curUrl), true);
             }
             if (history.state) {
                 var state = e.state;
 
-                router.back(state.rUrl,router.getOptions(curUrl));
+                router.back(state.rUrl, router.getOptions(curUrl));
             }
         }, false);
     }
+
     Router.prototype.set = function (o) {
         var curUrl = window.location.hash.substring(1);
         this.allUrl.push(o.rUrl);
         this.options[o.rUrl] = o;
         if (o.rUrl === curUrl) {
-           this.path(curUrl,undefined,true);
+            this.path(curUrl, undefined, true);
         }
         return this;
     };
@@ -36,10 +37,18 @@
         router.curUrl = rUrl;
         router.options[rUrl] = o = extend(router.options[rUrl], o);
 
-        $.ajax({
+        //$.ajax({
+        //    url: router.options[rUrl].templateUrl,
+        //    dataType: 'text',
+        //    type: 'get',
+        //    success: function (text) {
+        //        bool ? window.history.replaceState(o, '', '#' + rUrl) : window.history.pushState(o, '', '#' + rUrl);
+        //        router.content.innerHTML = text;
+        //        router.fn[rUrl](o);
+        //    }
+        //});
+        _ajax({
             url: router.options[rUrl].templateUrl,
-            dataType: 'text',
-            type: 'get',
             success: function (text) {
                 bool ? window.history.replaceState(o, '', '#' + rUrl) : window.history.pushState(o, '', '#' + rUrl);
                 router.content.innerHTML = text;
@@ -55,10 +64,18 @@
         router.curUrl = rUrl;
         router.options[rUrl] = o = extend(router.options[rUrl], o);
 
-        $.ajax({
+        //$.ajax({
+        //    url: router.options[rUrl].templateUrl,
+        //    dataType: 'text',
+        //    type: 'get',
+        //    success: function (text) {
+        //        router.content.innerHTML = text;
+        //        router.fn[rUrl](o);
+        //    }
+        //});
+
+        _ajax({
             url: router.options[rUrl].templateUrl,
-            dataType: 'text',
-            type: 'get',
             success: function (text) {
                 router.content.innerHTML = text;
                 router.fn[rUrl](o);
@@ -68,8 +85,8 @@
 
     Router.prototype.otherwise = function (rUrl) {
         this.otherwiseUrl = rUrl;
-        if (this.allUrl.indexOf(rUrl) != '-1' && this.allUrl.indexOf(window.location.hash.substring(1)) =='-1' ) {
-            this.path(rUrl,undefined,true);
+        if (this.allUrl.indexOf(rUrl) != '-1' && this.allUrl.indexOf(window.location.hash.substring(1)) == '-1') {
+            this.path(rUrl, undefined, true);
         }
     };
 
@@ -82,9 +99,9 @@
         return this.options[url];
     };
 
-    function extend (a, b) {
+    function extend(a, b) {
         var x;
-        for(x in b) {
+        for (x in b) {
             a[x] = b[x];
         }
         return a;
