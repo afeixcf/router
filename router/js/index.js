@@ -11,6 +11,10 @@
         .set({
             templateUrl: 'html/template03.html',
             rUrl: '/03'
+        })
+        .set({
+            template: '123456',
+            rUrl: '/04'
         });
 
     router.otherwise('/template01');
@@ -41,5 +45,9 @@
     router.controller('/03', function (params) {
         console.log('03:' + params);
         console.log(params);
+    });
 
+    router.controller('/04', function (params) {
+        console.log('04:' + params);
+        console.log(params);
     });
