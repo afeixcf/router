@@ -10,15 +10,21 @@
             position:relative;top:0;height:44px;left:0;right:0;background:#333;color:white;line-height:44px;
             text-align:center;
         }
+        [m-view] {
+            top:0;
+            position:absolute;
+            padding-top:80px;z-index:-1;
+            bottom:0;
+        }
     </style>
 </head>
 <body>
 <div class="header">biaoti</div>
-    <div id="routerContent">
+    <div id="routerContent" mas-wrap>
     </div>
 
 
-    <script src="js/router_j.js"></script>
+    <script src="js/mars-router.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>
